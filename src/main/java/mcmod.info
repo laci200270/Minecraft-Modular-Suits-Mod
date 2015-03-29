@@ -1,0 +1,16 @@
+[
+{
+  "modid": "modularsuits",
+  "name": "ModularSuits",
+  "description": "Modular suits for minecraft",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["laci200270"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
