@@ -1,6 +1,6 @@
 language: groovy
 jdk: oraclejdk7
-script: gradle
+script: gradle build
 install: 
 - chmod +x gradle
 - gradle setupCIworkspace
