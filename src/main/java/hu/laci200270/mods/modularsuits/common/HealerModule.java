@@ -5,6 +5,7 @@ import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -35,6 +36,12 @@ public class HealerModule implements IArmorElement {
 			}
 		}
 		return armor;
+	}
+
+	@Override
+	public ItemStack[] recipe() {
+		
+		return new ItemStack[]{new ItemStack(Items.golden_apple, 3),new ItemStack(Items.milk_bucket, 1)};
 	}
 
 	
