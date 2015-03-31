@@ -1,13 +1,13 @@
 language: groovy
 jdk: oraclejdk7
+script: gradle build
+install:
+- chmod +x gradle
 deploy:
   provider: releases
   api_key:
     secure: WEeXt1U2JZ+/BkOOSXjWXUG7h+WfnWTe2VfPIlf6ZlObomTcekfqIyOwsPtsrsrbg4OBeCpvL/vyNFr8+Kr9GkfbH16VxbREzYItkiUPYv3EJUEP41hlmeFE8MjiyIaHSEfzK7Ud/btmRZ601463tzTBF44JnCoKw8K/ySKZjho=
   file: build/libs/*.jar
+  skip_cleanup: true
   on:
-    repo: laci200270/Minecraft-Modular-Suits-mod
-script: gradle build
-install:
-- chmod +x gradle
-- gradle setupCIworkspace
+    tags: true
