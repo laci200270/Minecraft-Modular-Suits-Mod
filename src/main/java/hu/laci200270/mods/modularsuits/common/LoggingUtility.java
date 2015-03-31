@@ -14,17 +14,20 @@ public class LoggingUtility {
 	public LoggingUtility(String name) {
 		logFile=new File(Minecraft.getMinecraft().mcDataDir,name+".log");
 		try {
+			
 			writer=new PrintWriter(logFile);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			e.printStackTrace();}
+	
 	}
 
-	public void log(String string) {
-		
+	public void logWhenDebug(String string) {
+		if(Reference.DEBUG){
+		System.out.println(string);
 		writer.write(string+"\n");
 		writer.flush();
+		}
 	}
 	
 	@Override

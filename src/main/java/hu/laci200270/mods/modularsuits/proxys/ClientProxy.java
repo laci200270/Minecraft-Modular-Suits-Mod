@@ -28,7 +28,7 @@ public class ClientProxy extends CommonProxy {
             {
                 public ModelResourceLocation getModelLocation(ItemStack stack)
                {
-                  return new ModelResourceLocation(Reference.MODID+stack.getUnlocalizedName().substring(5), "inventory");
+                  return new ModelResourceLocation(Reference.MODID+":"+stack.getUnlocalizedName().substring(5), "inventory");
                }
               }    );
 		}

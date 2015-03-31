@@ -14,26 +14,28 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Reference {
-	public static ArmorMaterial modulararmormaterial=EnumHelper.addArmorMaterial("MODULAR_ARMOR", null, 16, new int[] {3, 8, 6, 3}, 0);
-	public static Item armorHelmet=new ModularArmorItem(modulararmormaterial, 0, 0);
-	public static Item armorChest=new ModularArmorItem(modulararmormaterial, 0, 1);
-	public static Item armorLeggings=new ModularArmorItem(modulararmormaterial, 0, 2);
-	public static Item armorBoots=new ModularArmorItem(modulararmormaterial, 0, 3);
+	
 	public static Block constructingTable=new ConstructingTable();
 	public static LoggingUtility logger=new LoggingUtility("ModularSuits");
 	public static final String MODID="modularsuits";
 	public static ArrayList<Item> items=new ArrayList<Item>();
 	public static ArrayList<Block> blocks=new ArrayList<Block>();
 	public static ArrayList<IArmorElement> armorElements=new ArrayList<IArmorElement>();
-	public static ResourceLocation backgroundConstructionTable=new ResourceLocation(MODID, "textures/gui/constructiontable");
+	public static ArmorMaterial modulararmormaterial=EnumHelper.addArmorMaterial("MODULAR_ARMOR", null, 16, new int[] {3, 8, 6, 3}, 0);
 	public static boolean DEBUG = true;
+	public static Item armorHelmet=new ModularArmorItem(modulararmormaterial, 0, 0);
+	public static Item armorChest=new ModularArmorItem(modulararmormaterial, 0, 1);
+	public static Item armorLeggings=new ModularArmorItem(modulararmormaterial, 0, 2);
+	public static Item armorBoots=new ModularArmorItem(modulararmormaterial, 0, 3);
+	public static ResourceLocation backgroundConstructionTable=new ResourceLocation( MODID+":textures/gui/constructiontable.png");
+	
 	public static void registerItems(){
 		
 		for (Item item : items) {
-			if(Reference.DEBUG){
-				System.out.println("Registering item:" +item.getUnlocalizedName().substring(5));
-				logger.log("Registering item:" +item.getUnlocalizedName().substring(5));
-			}
+			
+				
+				logger.logWhenDebug("Registering item:" +item.getUnlocalizedName().substring(5));
+			
 			
 			GameRegistry.registerItem(item,item.getUnlocalizedName().substring(5));
 		}
@@ -52,10 +54,10 @@ public class Reference {
 	}
 	public static void registerBlocks(){
 		for (Block block : blocks) {
-			if(Reference.DEBUG){
-				System.out.println("Registering block:" +block.getUnlocalizedName().substring(5));
-				logger.log("Registering block:" +block.getUnlocalizedName().substring(5));
-			}
+		
+				
+				logger.logWhenDebug("Registering block:" +block.getUnlocalizedName().substring(5));
+			
 			
 			GameRegistry.registerBlock(block,block.getUnlocalizedName().substring(5));
 	}}

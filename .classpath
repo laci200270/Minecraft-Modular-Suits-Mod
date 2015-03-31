@@ -64,6 +64,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/user/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.1.1334/start"/>
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/CodeChickenCore-1.8-1.0.5.34-dev (1).jar" sourcepath="C:/Users/user/Downloads/CodeChickenCore-1.8-1.0.5.34-src.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/NotEnoughItems-1.8-1.0.5.82-dev.jar" sourcepath="C:/Users/user/Downloads/NotEnoughItems-1.8-1.0.5.82-src.jar"/>
-	<classpathentry kind="lib" path="D:/forge-1.8-11.14.1.1341-src/mods/1.8/CodeChickenLib-1.8-1.1.2.115-dev.jar"/>
+	<classpathentry kind="lib" path="D:/forge-1.8-11.14.1.1341-src/Minecraft-Modular-Suits-mod/mods/1.8/CodeChickenLib-1.8-1.1.2.115-dev.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

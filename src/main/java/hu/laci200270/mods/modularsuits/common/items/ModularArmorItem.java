@@ -1,46 +1,68 @@
 package hu.laci200270.mods.modularsuits.common.items;
 
-import hu.laci200270.mods.modularsuits.common.HealerModule;
+import hu.laci200270.mods.modularsuits.api.IModItem;
+import hu.laci200270.mods.modularsuits.common.Reference;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ModularArmorItem extends ItemArmor {
+public class ModularArmorItem extends ItemArmor  implements IModItem{
 
 	int armorType;
+	private String name;
 	
 	public ModularArmorItem(ArmorMaterial material, int renderIndex, int armorType) {
 		super(material, renderIndex, armorType);
 		switch (armorType) {
 		case 0:
-			setUnlocalizedName("modularHelmet");
+			setName("modularHelmet");
 			break;
 		case 1:
-			setUnlocalizedName("modularChestplate");
+			setName("modularChestplate");
 			
 			break;
 		case 2:
-			setUnlocalizedName("modularLeggings");
+			setName("modularLeggings");
 			break;
 		case 3:
-			setUnlocalizedName("modularBoots");
+			setName("modularBoots");
 			break;
 		default:
-			setUnlocalizedName("unkown_element_this_should_not_be_apear");
+			setName("unkown_element_this_should_not_be_apear");
 			break;
 			
 		}
-		GameRegistry.registerItem(this, getUnlocalizedName().substring(5));
+		GameRegistry.registerItem(this, getName());
+		//GameRegistry
 		this.armorType=armorType;
 	}
+	private void setName(String name) {
+		this.name = name;
+		setUnlocalizedName(name);
+		
+		
+			Reference.logger.logWhenDebug("Setting name for :"+name);
+		
+	
+	}
+	public String getName(){
+		return name;
+	}	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player,
 			ItemStack itemStack) {
 if (armorType==1) {
-	new HealerModule().onElementTick(player, itemStack, 0, 20000);
+	//new HealerModule().onElementTick(player, itemStack, 0, 20000);
 }
+
+	}
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	{
+	    return Reference.MODID + ":textures/armor/" +"modulararmor" + "_" + (this.armorType == 2 ? "2" : "1") + ".png";
 	}
 	
 }

@@ -2,13 +2,13 @@ language: groovy
 jdk: oraclejdk7
 deploy:
   provider: releases
-  api_key: "GITHUB OAUTH TOKEN"
-  file: "FILE TO UPLOAD"
-  skip_cleanup: true
+  api_key:
+    secure: WEeXt1U2JZ+/BkOOSXjWXUG7h+WfnWTe2VfPIlf6ZlObomTcekfqIyOwsPtsrsrbg4OBeCpvL/vyNFr8+Kr9GkfbH16VxbREzYItkiUPYv3EJUEP41hlmeFE8MjiyIaHSEfzK7Ud/btmRZ601463tzTBF44JnCoKw8K/ySKZjho=
+  file: build/libs/*.jar
   on:
-    tags: true
+    repo: laci200270/Minecraft-Modular-Suits-mod
 script: gradle build
-install: 
+install:
 - chmod +x gradle
 - gradle setupCIworkspace
 - travis setup releases
