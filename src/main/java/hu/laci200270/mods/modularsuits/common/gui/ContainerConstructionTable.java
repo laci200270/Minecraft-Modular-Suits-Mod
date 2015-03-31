@@ -1,17 +1,18 @@
 package hu.laci200270.mods.modularsuits.common.gui;
 
+import hu.laci200270.mods.modularsuits.common.Reference;
+import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IChatComponent;
 
 public class ContainerConstructionTable extends Container  {
 
-	public ContainerConstructionTable(InventoryPlayer par1InventoryPlayer) {
-		 for (int i = 0; i < 3; i++)
+	public ContainerConstructionTable(InventoryPlayer par1InventoryPlayer,TileConstructingTable tileEntity) {
+		
+		for (int i = 0; i < 3; i++)
 		 {
 			 for (int k = 0; k < 9; k++)
 			 {
@@ -24,117 +25,8 @@ public class ContainerConstructionTable extends Container  {
 			 
 			 addSlotToContainer(new Slot(par1InventoryPlayer, j, 8 + j * 18, 142));
 		 }
-		 
-		 addSlotToContainer(new Slot(new IInventory() {
-			
-			@Override
-			public boolean hasCustomName() {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-			@Override
-			public String getName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public IChatComponent getDisplayName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public void setInventorySlotContents(int index, ItemStack stack) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void setField(int id, int value) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void openInventory(EntityPlayer player) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void markDirty() {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public boolean isUseableByPlayer(EntityPlayer player) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-			@Override
-			public boolean isItemValidForSlot(int index, ItemStack stack) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-			@Override
-			public ItemStack getStackInSlotOnClosing(int index) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public ItemStack getStackInSlot(int index) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public int getSizeInventory() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public int getInventoryStackLimit() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public int getFieldCount() {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public int getField(int id) {
-				// TODO Auto-generated method stub
-				return 0;
-			}
-			
-			@Override
-			public ItemStack decrStackSize(int index, int count) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public void closeInventory(EntityPlayer player) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void clear() {
-				// TODO Auto-generated method stub
-				
-			}
-		}, 20, 600, 700));
+		 addSlotToContainer(new ModularArmorSlot(tileEntity, 1, 12 , 33));
+		
 	}
 	
 	@Override
@@ -145,5 +37,33 @@ public class ContainerConstructionTable extends Container  {
 	public void addSlot(Slot slot){
 		addSlotToContainer(slot);
 	}
+	@Override
+	protected boolean mergeItemStack(ItemStack stack, int startIndex,
+			int endIndex, boolean useEndIndex) {
+		Reference.logger.logWhenDebug("Merge stack: "+stack.getDisplayName());
+		return super.mergeItemStack(stack, startIndex, endIndex, useEndIndex);
+	}
+	@Override
+	   public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot) {
+	      Slot slotObject = (Slot) inventorySlots.get(slot);
+	      if(slotObject != null && slotObject.getHasStack()) {
+	         ItemStack stackInSlot = slotObject.getStack();
+	         ItemStack stack = stackInSlot.copy();
+	         if(slot <= 1) {
+	            if(!mergeItemStack(stackInSlot, 1, inventorySlots.size(), true))
+	               return null;
+	         } else {
+	            return null;
+	         }
 
+	         if(stackInSlot.stackSize == 0)
+	            slotObject.putStack(null);
+	         else
+	            slotObject.onSlotChanged();
+
+	         return stack;
+	      }
+	      return null;
+	   }
+	   
 }

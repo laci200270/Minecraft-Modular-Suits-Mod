@@ -1,11 +1,13 @@
-package hu.laci200270.mods.modularsuits.common;
+package hu.laci200270.mods.modularsuits.common.modules;
 
 import hu.laci200270.mods.modularsuits.api.IArmorElement;
+import hu.laci200270.mods.modularsuits.common.items.ModularArmorItem;
 
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -24,10 +26,10 @@ public class HealerModule implements IArmorElement {
 		badPotionEffects.add(Potion.wither.id);
 	}
 	
-	public ItemStack onElementTick(EntityPlayer player, ItemStack armor,
-			int armorPiece, int allEnergy) {
+	public ItemStack[] onElementTick(EntityPlayer player,ItemStack currentArmor,ItemStack[] allArmors,int armorPiece) {
 		
-		@SuppressWarnings("unchecked")
+		
+		
 		ArrayList<PotionEffect> playerEffects=new ArrayList<PotionEffect>(player.getActivePotionEffects());
 		for (PotionEffect potion : playerEffects) {
 			Integer id=potion.getPotionID();
@@ -35,13 +37,27 @@ public class HealerModule implements IArmorElement {
 				player.removePotionEffect(id);
 			}
 		}
-		return armor;
+		return allArmors;
 	}
 
 	@Override
 	public ItemStack[] recipe() {
 		
 		return new ItemStack[]{new ItemStack(Items.golden_apple, 3),new ItemStack(Items.milk_bucket, 1)};
+	}
+
+	@Override
+	public Item icon() {
+		
+		return Items.milk_bucket;
+	}
+
+	@Override
+	public ItemStack sendMessage(Integer armorPiece, ItemStack armor,
+			String... message) {
+		
+		
+		return armor;
 	}
 
 	

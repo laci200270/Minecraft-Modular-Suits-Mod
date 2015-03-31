@@ -2,7 +2,9 @@ package hu.laci200270.mods.modularsuits.common.items;
 
 import hu.laci200270.mods.modularsuits.api.IModItem;
 import hu.laci200270.mods.modularsuits.common.Reference;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -62,7 +64,15 @@ if (armorType==1) {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-	    return Reference.MODID + ":textures/armor/" +"modulararmor" + "_" + (this.armorType == 2 ? "2" : "1") + ".png";
+	   Reference.logger.logWhenDebug("Searching armor texture at:"+Reference.MODID + ":textures/armor/" +"modulararmor" + "_" + (this.armorType == 2 ? "2" : "1") + ".png");
+		return Reference.MODID + ":textures/armor/" +"modulararmor" + "_" + (this.armorType == 2 ? "2" : "1") + ".png";
+	   
+	}
+	@Override
+	public ModelBiped getArmorModel(EntityLivingBase entityLiving,
+			ItemStack itemStack, int armorSlot) {
+		// TODO Auto-generated method stub
+		return super.getArmorModel(entityLiving, itemStack, armorSlot);
 	}
 	
 }
