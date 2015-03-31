@@ -11,4 +11,3 @@ script: gradle build
 install:
 - chmod +x gradle
 - gradle setupCIworkspace
-- travis setup releases
