@@ -8,21 +8,26 @@ buildscript {
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
-       
+        }
     }
-	 
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
-	
-	}
+}
+
+configurations {
+    //deployerJars
+    //packed
+    //compile.extendsFrom packed  
+}
+
+//add dependency repositories
 repositories {
 	mavenLocal()
-	mavenCentral()
-	
-	maven {
-        name 'CB Repo'
-            url "http://chickenbones.net/maven/"
+    mavenCentral()
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven/"
     }
 }
 
