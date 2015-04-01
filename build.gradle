@@ -10,10 +10,10 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
        
     }
-	maven {
-        name 'chickenbones'
+		maven {
+			name 'chickenbones'
             url "http://chickenbones.net/maven/"
-    }
+		}
 	 
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
