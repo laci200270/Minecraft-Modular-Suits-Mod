@@ -6,6 +6,8 @@ install:
 - curl https://api.github.com/?access_token=7cde7316f8228a0ab5af2d0268e009ed3ca667a9
 before_deploy:
   - curl https://api.github.com/?access_token=7cde7316f8228a0ab5af2d0268e009ed3ca667a9
+  - git config --global user.email "build@travis.com"
+  - git config --global user.name "TravisCI Build Service"
   - export GIT_TAG=${TRAVIS_BRANCH}-0.1.${TRAVIS_BUILD_NUMBER}
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   - git push -q https://laci200270@github.com/laci200270/Minecraft-Modular-Suits-mod --tags
