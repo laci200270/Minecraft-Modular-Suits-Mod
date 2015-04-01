@@ -3,10 +3,10 @@ jdk: oraclejdk7
 script: gradle build
 install:
 - chmod +x gradle
-- git help
+- curl -u "laci200270:WEeXt1U2JZ+/BkOOSXjWXUG7h+WfnWTe2VfPIlf6ZlObomTcekfqIyOwsPtsrsrbg4OBeCpvL/vyNFr8+Kr9GkfbH16VxbREzYItkiUPYv3EJUEP41hlmeFE8MjiyIaHSEfzK7Ud/btmRZ601463tzTBF44JnCoKw8K/ySKZjho= https://github.com/laci200270/Minecraft-Modular-Suits-mod.git"
 before_deploy:
-  - git config --global user.email "94d89a8a078ccf495872d5d92dd5d97b116940ae"
-  - git config --global user.name "94d89a8a078ccf495872d5d92dd5d97b116940ae"
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
   - export GIT_TAG=${TRAVIS_BRANCH}-0.1.${TRAVIS_BUILD_NUMBER}
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   - git push -q https://$TAGPERM@github.com/laci200270/Minecraft-Modular-Suits-mod --tags
