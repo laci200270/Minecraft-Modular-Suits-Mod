@@ -3,7 +3,7 @@ jdk: oraclejdk7
 script: gradle build
 install:
 - chmod +x gradle
-- curl -u 94d89a8a078ccf495872d5d92dd5d97b116940ae:x-oauth-basic https://api.github.com/laci200270
+- curl -u 94d89a8a078ccf495872d5d92dd5d97b116940ae:x-oauth-basic https://api.github.com/user
 before_deploy:
   - git config --global user.email "builds@travis-ci.com"
   - git config --global user.name "Travis CI"
