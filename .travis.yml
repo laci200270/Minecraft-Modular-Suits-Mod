@@ -3,7 +3,7 @@ jdk: oraclejdk7
 script: gradle build
 install:
 - chmod +x gradle
--git help
+- git help
 before_deploy:
   - git config --global user.email "94d89a8a078ccf495872d5d92dd5d97b116940ae"
   - git config --global user.name "94d89a8a078ccf495872d5d92dd5d97b116940ae"
