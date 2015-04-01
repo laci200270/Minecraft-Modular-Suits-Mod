@@ -16,7 +16,7 @@ buildscript {
 }
 
 configurations {
-    //deployerJars
+    deployerJars
     //packed
     //compile.extendsFrom packed  
 }
@@ -31,8 +31,6 @@ repositories {
     }
 }
 
-
-
 apply plugin: 'java'
 apply plugin: 'forge'
 apply plugin: 'maven'
@@ -40,23 +38,14 @@ apply plugin: 'maven'
 version = System.env.TRAVIS_BUILD_NUMBER
 group= "hu.laci200270.mods.modularsuits" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "modularsuits"
+
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-	compile "codechicken:CodeChickenLib:1.8-1.1.2.115:dev"
+    compile "codechicken:CodeChickenLib:1.8-1.1.2.115:dev"
 	compile "codechicken:CodeChickenCore:1.8-1.0.5.34:dev"
 	compile "codechicken:NotEnoughItems:1.8-1.0.5.34:dev"
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
 }
+
 minecraft {
     version = "1.8-11.14.1.1334"
     runDir = "eclipse"
@@ -68,8 +57,6 @@ minecraft {
     // simply re-run your setup task after changing the mappings to update your workspace.
     mappings = "snapshot_20141130"
 }
-
-
 
 processResources
 {
