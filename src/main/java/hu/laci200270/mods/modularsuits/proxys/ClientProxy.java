@@ -47,7 +47,7 @@ public class ClientProxy extends CommonProxy {
 				Reference.logger.logWhenDebug("instanceof");
 				TileConstructingTable tileEntity=(TileConstructingTable) world.getTileEntity(new BlockPos(x*1.0, y*1.0, z*1.0));
 			BlockPos pos=new BlockPos(x, y, z);
-			return new GuiConstructionTable(player.inventory, (TileConstructingTable) world.getTileEntity(pos), world, x, y, z);
+			return new GuiConstructionTable(player,player.inventory, (TileConstructingTable) world.getTileEntity(pos), world, x, y, z);
 			}
 			
 			return null;

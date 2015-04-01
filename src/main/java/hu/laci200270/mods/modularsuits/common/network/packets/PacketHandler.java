@@ -3,11 +3,13 @@ package hu.laci200270.mods.modularsuits.common.network.packets;
 import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.INetHandlerPlayServer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -20,10 +22,13 @@ public static final Object channel = "constructiontable";
 
 @Override
 public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandlerPlayServer netHandler) {
- switch (packet.getType()) {
+	Reference.logger.logWhenDebug("Packet got!");
+	switch (packet.getType()) {
  case 1:
-  Integer target=packet.readInt();
+  Reference.logger.logWhenDebug("Control got!");
+	 Integer target=packet.readInt();
   NBTTagCompound nbttag= packet.readNBTTagCompound();
+  player=MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(nbttag.getString("player"));
   BlockPos tilePos=new BlockPos(nbttag.getInteger("x"),nbttag.getInteger("y") , nbttag.getInteger("z"));
   TileEntity tile = player.getEntityWorld().getTileEntity(tilePos);
   World world=player.getEntityWorld();
@@ -34,9 +39,11 @@ public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandler
   if (tile != null && tile instanceof TileConstructingTable)
   {
 	 // Reference.logger.logWhenDebug("instanceof");
-  	InventoryPlayer invplayer=player.inventory;
+	
+	InventoryPlayer invplayer=player.inventory;
     Boolean okay=true;
-    IArmorElement[] modules=(IArmorElement[]) Reference.armorElements.toArray();
+    IArmorElement[] modules=null;
+    modules=(IArmorElement[]) Reference.armorElements.toArray(new IArmorElement[Reference.armorElements.size()]);
     ItemStack[] recipe=modules[target].recipe();
     for (int i = 0; i < recipe.length; i++) {
 		if(!Reference.consumeItems(player.inventory, recipe[i].getItem(), recipe[i].stackSize)){
@@ -46,6 +53,7 @@ public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandler
     if(!okay){
     	player.inventory=invplayer;
     }
+   
     Reference.logger.logWhenDebug("Status: "+okay);
   }
   break;

@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.crash.CrashReport;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,8 @@ public class GuiConstructionTable extends GuiContainer {
 	private int x;
 	private int y;
 	private int z;
-	public GuiConstructionTable(InventoryPlayer playerInv,TileConstructingTable tile, World world, int x, int y, int z) {
+	private EntityPlayer player;
+	public GuiConstructionTable(EntityPlayer player,InventoryPlayer playerInv,TileConstructingTable tile, World world, int x, int y, int z) {
 	
 		
         super(new ContainerConstructionTable(playerInv,tile));
@@ -34,6 +36,7 @@ public class GuiConstructionTable extends GuiContainer {
         this.x=x;
         this.y=y;
         this.z=z;
+        this.player=player;
 	}
 	
 	
@@ -68,7 +71,9 @@ public class GuiConstructionTable extends GuiContainer {
 			tag.setInteger("x", x);
 			tag.setInteger("y", y);
 			tag.setInteger("z", z);
+			tag.setString("player", player.getName());
 			packet.writeNBTTagCompound(tag);
+			packet.sendToServer();
 		}
 	}
 	
