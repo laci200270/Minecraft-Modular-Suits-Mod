@@ -13,7 +13,7 @@ buildscript {
 	 maven {
         name 'CB Repo'
             url "http://chickenbones.net/maven/"
-    }
+    }}
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
@@ -74,4 +74,4 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}}
+}
