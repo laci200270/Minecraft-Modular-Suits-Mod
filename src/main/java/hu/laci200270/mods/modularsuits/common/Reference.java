@@ -77,6 +77,7 @@ public static void addBaseTiles(){
 	public static void addArmorElement(IArmorElement element){
 		armorElements.add(element);
 	}
+	
 	public static boolean consumeItems(IInventory inventory, Item itemID, int count)
 	{
 	    boolean flag = false;

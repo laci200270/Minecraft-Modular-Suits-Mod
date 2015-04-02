@@ -1,28 +1,35 @@
 package hu.laci200270.mods.modularsuits.client.gui;
 
-import java.io.IOException;
-
-import codechicken.lib.packet.PacketCustom;
+import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.gui.ContainerConstructionTable;
 import hu.laci200270.mods.modularsuits.common.network.packets.PacketHandler;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
+
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import codechicken.lib.packet.PacketCustom;
 
 public class GuiConstructionTable extends GuiContainer {
 
 	private int x;
 	private int y;
 	private int z;
+	private int currentLine=1;
+	private int currentColumn=1;
+	int currentButtonId=0;
+	
 	private EntityPlayer player;
 	public GuiConstructionTable(EntityPlayer player,InventoryPlayer playerInv,TileConstructingTable tile, World world, int x, int y, int z) {
 	
@@ -37,18 +44,22 @@ public class GuiConstructionTable extends GuiContainer {
         this.y=y;
         this.z=z;
         this.player=player;
+       
 	}
 	
 	
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
-		int cornerX = (width - xSize) / 2 ;
-        int cornerY = (height - ySize) / 2;
-		this.buttonList.add(new ModuleAddButton(0, cornerX+10, cornerY+10, 20, 20, new ItemStack(Items.golden_apple)));
-		super.drawScreen(mouseX, mouseY, partialTicks);
+
+        		super.drawScreen(mouseX, mouseY, partialTicks);
+        		resetProgress(); 
+        		for (IArmorElement element : Reference.armorElements) {
+        	        	Reference.logger.logWhenDebug("Currently adding: "+currentButtonId +"id and name is: "+element.getClass().getName());
+        	        	addModuleButton(element);
+        	        }
 	}
 
 	@Override
@@ -63,8 +74,8 @@ public class GuiConstructionTable extends GuiContainer {
 	}
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
-		// TODO Auto-generated method stub
-		if(button.id==0){
+		
+		
 			PacketCustom packet= new PacketCustom(PacketHandler.channel, 1);
 			packet.writeInt(button.id);
 			NBTTagCompound tag=new NBTTagCompound();
@@ -74,9 +85,31 @@ public class GuiConstructionTable extends GuiContainer {
 			tag.setString("player", player.getName());
 			packet.writeNBTTagCompound(tag);
 			packet.sendToServer();
-		}
+		
 	}
-	
-	
+	@SuppressWarnings("unchecked")
+	@SideOnly(Side.CLIENT)
+	private void addModuleButton(IArmorElement element){
+		int cornerX = (width - xSize) / 2 ;
+        int cornerY = (height - ySize) / 2;
+		
+		this.buttonList.add(new ModuleAddButton(currentButtonId, cornerX+10+currentColumn*25, cornerY+10+currentLine*25, 20, 20, new ItemStack(element.icon())));
+		Reference.logger.logWhenDebug("Current button id: "+currentButtonId+ "X-cord:"+cornerX+10+currentColumn*25+"Y-cord: "+ cornerY+1+currentLine*25);
+		incrementCurrent();
+		
+		currentButtonId++;
+	}
+	private void incrementCurrent(){
+		if(currentColumn==4){
+			currentLine++;
+			currentColumn=1;
+		}
+		else currentColumn++;
+	}
+	private void resetProgress(){
+		currentButtonId=0;
+		currentLine=1;
+		currentColumn=1;
+	}
 	
 }

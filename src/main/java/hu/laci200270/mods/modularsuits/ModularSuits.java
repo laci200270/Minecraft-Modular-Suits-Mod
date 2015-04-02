@@ -3,6 +3,7 @@ package hu.laci200270.mods.modularsuits;
 import sun.nio.cs.ext.PCK;
 import codechicken.lib.packet.PacketCustom;
 import hu.laci200270.mods.modularsuits.common.Reference;
+import hu.laci200270.mods.modularsuits.common.modules.HealerModule;
 import hu.laci200270.mods.modularsuits.common.network.packets.PacketHandler;
 import hu.laci200270.mods.modularsuits.proxys.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -34,7 +35,7 @@ public void init(FMLInitializationEvent event){
 	Reference.addBaseTiles();
 	Reference.registerTiles();
 	NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
-	
+	Reference.addArmorElement(new HealerModule());
 	proxy.registerBasicItemRenderStuff(Reference.items);
 }
 

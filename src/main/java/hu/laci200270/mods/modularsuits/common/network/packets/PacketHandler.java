@@ -29,6 +29,7 @@ public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandler
 	 Integer target=packet.readInt();
   NBTTagCompound nbttag= packet.readNBTTagCompound();
   player=MinecraftServer.getServer().getConfigurationManager().getPlayerByUsername(nbttag.getString("player"));
+  Reference.logger.logWhenDebug("Player's name: "+nbttag.getString("player"));
   BlockPos tilePos=new BlockPos(nbttag.getInteger("x"),nbttag.getInteger("y") , nbttag.getInteger("z"));
   TileEntity tile = player.getEntityWorld().getTileEntity(tilePos);
   World world=player.getEntityWorld();
@@ -38,15 +39,19 @@ public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandler
   }
   if (tile != null && tile instanceof TileConstructingTable)
   {
-	 // Reference.logger.logWhenDebug("instanceof");
+	  Reference.logger.logWhenDebug("instanceof");
 	
 	InventoryPlayer invplayer=player.inventory;
+	Reference.logger.logWhenDebug("ineventory ok");
+	Reference.logger.logWhenDebug("Target: "+target);
     Boolean okay=true;
     IArmorElement[] modules=null;
     modules=(IArmorElement[]) Reference.armorElements.toArray(new IArmorElement[Reference.armorElements.size()]);
+    Reference.logger.logWhenDebug("array ok");
     ItemStack[] recipe=modules[target].recipe();
     for (int i = 0; i < recipe.length; i++) {
 		if(!Reference.consumeItems(player.inventory, recipe[i].getItem(), recipe[i].stackSize)){
+			Reference.logger.logWhenDebug("loop ok");
 			okay=false;
 		}
 	}
