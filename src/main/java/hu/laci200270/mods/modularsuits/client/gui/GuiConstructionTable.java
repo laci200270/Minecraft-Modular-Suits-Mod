@@ -3,6 +3,7 @@ package hu.laci200270.mods.modularsuits.client.gui;
 import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.gui.ContainerConstructionTable;
+import hu.laci200270.mods.modularsuits.common.items.ModularArmorItem;
 import hu.laci200270.mods.modularsuits.common.network.packets.PacketHandler;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
 
@@ -23,14 +24,15 @@ import codechicken.lib.packet.PacketCustom;
 
 public class GuiConstructionTable extends GuiContainer {
 
-	private int x;
-	private int y;
-	private int z;
+	public int x;
+	public int y;
+	public int z;
 	private int currentLine=1;
 	private int currentColumn=1;
 	int currentButtonId=0;
 	
 	private EntityPlayer player;
+	private TileConstructingTable tile;
 	public GuiConstructionTable(EntityPlayer player,InventoryPlayer playerInv,TileConstructingTable tile, World world, int x, int y, int z) {
 	
 		
@@ -44,22 +46,26 @@ public class GuiConstructionTable extends GuiContainer {
         this.y=y;
         this.z=z;
         this.player=player;
+        this.tile=tile;
        
 	}
 	
 	
 
-	
+	@Override
+	public void initGui() {
+		resetProgress(); 
+		for (IArmorElement element : Reference.armorElements) {
+	        	Reference.logger.logWhenDebug("Currently adding: "+currentButtonId +"id and name is: "+element.getClass().getName());
+	        	addModuleButton(element);
+	        }
+	}
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
 
         		super.drawScreen(mouseX, mouseY, partialTicks);
-        		resetProgress(); 
-        		for (IArmorElement element : Reference.armorElements) {
-        	        	Reference.logger.logWhenDebug("Currently adding: "+currentButtonId +"id and name is: "+element.getClass().getName());
-        	        	addModuleButton(element);
-        	        }
+        		
 	}
 
 	@Override
@@ -76,7 +82,7 @@ public class GuiConstructionTable extends GuiContainer {
 	protected void actionPerformed(GuiButton button) throws IOException {
 		
 		
-			PacketCustom packet= new PacketCustom(PacketHandler.channel, 1);
+		PacketCustom packet= new PacketCustom(PacketHandler.channel, 1);
 			packet.writeInt(button.id);
 			NBTTagCompound tag=new NBTTagCompound();
 			tag.setInteger("x", x);
@@ -85,6 +91,11 @@ public class GuiConstructionTable extends GuiContainer {
 			tag.setString("player", player.getName());
 			packet.writeNBTTagCompound(tag);
 			packet.sendToServer();
+		if(tile.armorpiece!=null&&tile.armorpiece.getItem() instanceof ModularArmorItem ){
+			if(!tile.armorpiece.getTagCompound().getBoolean(Reference.armorElements.get(button.id).getUnlocalizedName())){
+				
+			}
+		}
 		
 	}
 	@SuppressWarnings("unchecked")

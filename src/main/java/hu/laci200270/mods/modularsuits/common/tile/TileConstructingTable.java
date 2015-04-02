@@ -14,7 +14,7 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 public class TileConstructingTable extends TileEntity implements IInventory{
-	private ItemStack armorpiece=null;
+	public ItemStack armorpiece=null;
 	
 	public TileConstructingTable() {
 		

@@ -111,4 +111,38 @@ public static void addBaseTiles(){
 	    }
 	    return flag;
 	}
+	public static boolean simulateConsumeItems(IInventory inventory2, Item itemID, int count)
+	{
+		IInventory inventory=inventory2;
+	    boolean flag = false;
+	    for (int slot = 0, remain = count; slot < inventory.getSizeInventory(); ++slot)
+	    {
+		    ItemStack itemstack = inventory.getStackInSlot(slot);
+		    if (itemstack != null && itemstack.getItem() == itemID)
+		    {
+			    if ((remain -= itemstack.stackSize) <= 0)
+			    {
+				    flag = true;
+				    break;
+			    }
+		    }
+	    }
+	    if (flag)
+	    {
+		    for (int slot = 0; count > 0 && slot < inventory.getSizeInventory(); ++slot)
+		    {
+			    ItemStack itemstack = inventory.getStackInSlot(slot);
+			    if (itemstack != null && itemstack.getItem() == itemID)
+			    {
+				    if ((count -= itemstack.stackSize) >= 0)
+				    {
+					    inventory.setInventorySlotContents(slot, (ItemStack)null);
+				    } else {
+					    itemstack.stackSize = -count;
+				    }
+			    }
+		    }
+	    }
+	    return flag;
+	}
 }

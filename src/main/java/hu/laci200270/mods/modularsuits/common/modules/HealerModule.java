@@ -30,6 +30,7 @@ public class HealerModule implements IArmorElement {
 		
 		
 		
+		@SuppressWarnings("unchecked")
 		ArrayList<PotionEffect> playerEffects=new ArrayList<PotionEffect>(player.getActivePotionEffects());
 		for (PotionEffect potion : playerEffects) {
 			Integer id=potion.getPotionID();
@@ -55,9 +56,13 @@ public class HealerModule implements IArmorElement {
 	@Override
 	public ItemStack sendMessage(Integer armorPiece, ItemStack armor,
 			String... message) {
-		
-		
 		return armor;
+	}
+
+	@Override
+	public String getUnlocalizedName() {
+		
+		return "hu.laci200270.mods.modularsuits.modules.healermodule";
 	}
 
 	

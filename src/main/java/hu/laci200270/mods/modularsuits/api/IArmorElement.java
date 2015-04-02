@@ -10,5 +10,6 @@ public interface IArmorElement {
 	public ItemStack[] recipe();
 	public Item icon();
 	public ItemStack sendMessage(Integer armorPiece,ItemStack armor,String... message);
+	public String getUnlocalizedName();
 	
 }

@@ -23,8 +23,7 @@ public class ClientProxy extends CommonProxy {
 		
 		for (Item item : list) {
 			System.out.println("Registering render stuff for :"+item.getUnlocalizedName());
-			/*ModelResourceLocation res = new ModelResourceLocation(Refence.MODID+item.getUnlocalizedName().substring(5), "inventory");
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, res);*/
+		
 			RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 			renderItem.getItemModelMesher().register(item, new ItemMeshDefinition()
             {
@@ -46,8 +45,8 @@ public class ClientProxy extends CommonProxy {
 			if(world.getTileEntity(new BlockPos(x, y, z)) instanceof TileConstructingTable){
 				Reference.logger.logWhenDebug("instanceof");
 				TileConstructingTable tileEntity=(TileConstructingTable) world.getTileEntity(new BlockPos(x*1.0, y*1.0, z*1.0));
-			BlockPos pos=new BlockPos(x, y, z);
-			return new GuiConstructionTable(player,player.inventory, (TileConstructingTable) world.getTileEntity(pos), world, x, y, z);
+			
+			return new GuiConstructionTable(player,player.inventory, (TileConstructingTable) tileEntity, world, x, y, z);
 			}
 			
 			return null;
