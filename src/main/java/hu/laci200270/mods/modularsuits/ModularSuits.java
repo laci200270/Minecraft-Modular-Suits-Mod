@@ -6,6 +6,7 @@ import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.modules.HealerModule;
 import hu.laci200270.mods.modularsuits.common.network.packets.PacketHandler;
 import hu.laci200270.mods.modularsuits.proxys.CommonProxy;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -37,6 +38,7 @@ public void init(FMLInitializationEvent event){
 	NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 	Reference.addArmorElement(new HealerModule());
 	proxy.registerBasicItemRenderStuff(Reference.items);
+	
 }
 
 }

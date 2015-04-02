@@ -61,6 +61,7 @@ if (armorType==1) {
 }
 
 	}
+
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
