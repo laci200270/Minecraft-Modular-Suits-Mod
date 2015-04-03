@@ -2,13 +2,4 @@ Setting name for :modularHelmet
 Setting name for :modularChestplate
 Setting name for :modularLeggings
 Setting name for :modularBoots
-Registering block:contructiontable
-case 0
-instanceof
-Currently adding: 0id and name is: hu.laci200270.mods.modularsuits.common.modules.HealerModule
-Current button id: 0X-cord:1251025Y-cord: 37125
-instanceof
-case 0
-instanceof
-Currently adding: 0id and name is: hu.laci200270.mods.modularsuits.common.modules.HealerModule
-Current button id: 0X-cord:1251025Y-cord: 37125
+Registering block:modularsuits_ctable

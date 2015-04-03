@@ -11,6 +11,8 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -73,7 +75,12 @@ public class ModularArmorItem extends ItemArmor  implements IModItem{
 			ItemStack stack) {
 		if(stack.getTagCompound()==null){
 			stack.setTagCompound(new NBTTagCompound());
-		}	
+		}
+		IInventory inv2=player.inventory;
+		if(!Reference.simulateConsumeItems(player.inventory, Reference.energyCrystal, 1)){
+			return;
+		}
+		player.inventory=(InventoryPlayer) inv2;
 		for (IArmorElement element : Reference.armorElements) {
 				if(stack.getTagCompound().getBoolean(element.getUnlocalizedName())){
 					ItemStack[] playerArmor=new ItemStack[4];

@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 public class SpeedModule implements IArmorElement {
@@ -13,7 +14,7 @@ public class SpeedModule implements IArmorElement {
 	@Override
 	public ItemStack[] onElementTick(EntityPlayer player,
 			ItemStack currentArmor, ItemStack[] allArmors, int armorPiece) {
-		player.addPotionEffect(new PotionEffect(5, 2));
+		player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2));
 		
 		
 		return allArmors;

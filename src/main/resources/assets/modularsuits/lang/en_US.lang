@@ -1,0 +1,11 @@
+hu.laci200270.mods.modularsuits.modules.waterbreathing.name=Water-Breathing module
+hu.laci200270.mods.modularsuits.modules.speedmodule.name=Fast-Running module
+hu.laci200270.mods.modularsuits.modules.feathermodule.name=Feather-Falling module
+hu.laci200270.mods.modularsuits.modules.healermodule.name=Potion removing module
+hu.laci200270.mods.modularsuits.modules.nightvision.name=Night-Vision module
+item.modularChestplate.name=Modular ChestPlate
+item.modularBoots.name=Modular Boots
+item.modularLeggings.name=Modular Leggings
+item.modularHelmet.name=Modular Helmet
+tile.modularsuits_ctable.name=Construction Table
+item.ecrystal.name=Energy Crystal

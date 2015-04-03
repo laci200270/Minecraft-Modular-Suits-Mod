@@ -1,3 +1,5 @@
+We release now
+We release now
 ****************************
  Powered By MCP:             
  http://mcp.ocean-labs.de/   
@@ -9,15 +11,10 @@
 :processApiResources UP-TO-DATE
 :apiClasses UP-TO-DATE
 :sourceMainJava UP-TO-DATE
-:compileJava
-Download http://files.minecraftforge.net/maven/codechicken/CodeChickenLib/1.8-1.1.2.132/CodeChickenLib-1.8-1.1.2.132-dev.jar
-warning: [options] bootstrap class path not set in conjunction with -source 1.6
-Note: D:\forge-1.8-11.14.1.1341-src\Minecraft-Modular-Suits-mod\build\sources\java\hu\laci200270\mods\modularsuits\common\modules\HealerModule.java uses unchecked or unsafe operations.
-Note: Recompile with -Xlint:unchecked for details.
-1 warning
+:compileJava UP-TO-DATE
 :processResources UP-TO-DATE
-:classes
-:devJar
+:classes UP-TO-DATE
+:devJar UP-TO-DATE
 :jar
 :compileTestJava UP-TO-DATE
 :processTestResources UP-TO-DATE
@@ -28,11 +25,11 @@ Note: Recompile with -Xlint:unchecked for details.
 :extractUserDev UP-TO-DATE
 :genSrgs SKIPPED
 :reobf
-:sourceJar
+:sourceJar UP-TO-DATE
 :assemble
 :check UP-TO-DATE
 :build
 
 BUILD SUCCESSFUL
 
-Total time: 41.795 secs
+Total time: 28.144 secs

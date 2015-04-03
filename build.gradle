@@ -48,7 +48,15 @@ configFile.withReader {
     prop.load(it)
     project.ext.config = new ConfigSlurper().parse prop
 }
-
+task setVersion {
+if(version==null){
+version=System.env.BUILD_NUMBER
+}
+if(version==null){
+version=1.0
+}
+println 'We release now'
+}
 dependencies {
     compile "codechicken:CodeChickenLib:${config.mc_version}-${config.ccl_version}:dev"
     compile "codechicken:CodeChickenCore:${config.mc_version}-${config.ccc_version}:dev"
@@ -83,6 +91,7 @@ sourceSets {
 
 processResources
 {
+	setVersion()
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -111,12 +120,12 @@ processResources
 task sourceJar(type: Jar) {
     from sourceSets.main.java
     from new File(root, "dev")
-    classifier = 'sources'
+    classifier = version+'-sources'
 }
 
 task devJar(type: Jar) {
     from sourceSets.main.output
-    classifier = 'dev'
+    classifier = version+'-dev'
 }
 
 artifacts {

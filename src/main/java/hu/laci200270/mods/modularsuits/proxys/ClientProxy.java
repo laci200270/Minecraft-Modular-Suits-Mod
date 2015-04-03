@@ -1,11 +1,13 @@
 package hu.laci200270.mods.modularsuits.proxys;
 
+import hu.laci200270.mods.modularsuits.api.IModItem;
 import hu.laci200270.mods.modularsuits.client.gui.GuiConstructionTable;
 import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -29,9 +31,13 @@ public class ClientProxy extends CommonProxy {
             {
                 public ModelResourceLocation getModelLocation(ItemStack stack)
                {
+                	
+                	
                   return new ModelResourceLocation(Reference.MODID+":"+stack.getUnlocalizedName().substring(5), "inventory");
                }
               }    );
+			
+			
 		}
 		
 	}
@@ -57,5 +63,14 @@ public class ClientProxy extends CommonProxy {
 			
 		}
 	}
+	@Override
+	public void registerBlocksRenderer(ArrayList<Block> blocks){
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+		for (Block block : blocks) {
+			
+		
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MODID + ":" + ((IModItem) block).getName(), "inventory"));
+		}
+		}
 	
 }

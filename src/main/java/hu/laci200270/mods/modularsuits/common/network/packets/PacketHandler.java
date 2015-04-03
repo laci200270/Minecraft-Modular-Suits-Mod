@@ -73,7 +73,7 @@ public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandler
 			okay=false;
 		}
 	}
-   
+    tile2.armorpiece.getTagCompound().setBoolean(Reference.armorElements.get(target).getUnlocalizedName(),okay);
     Reference.logger.logWhenDebug("Status: "+okay);
   }
   break;

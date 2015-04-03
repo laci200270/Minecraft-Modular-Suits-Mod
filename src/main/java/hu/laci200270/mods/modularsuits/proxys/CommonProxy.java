@@ -1,10 +1,15 @@
 package hu.laci200270.mods.modularsuits.proxys;
 
+import hu.laci200270.mods.modularsuits.api.IModItem;
 import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -53,5 +58,13 @@ public class CommonProxy implements IGuiHandler {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public void registerBlocksRenderer(ArrayList<Block> blocks){
+		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+		for (Block block : blocks) {
+			
+		
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MODID + ":" + ((IModItem) block).getName(), "inventory"));
+		}
+		}
 	
 }

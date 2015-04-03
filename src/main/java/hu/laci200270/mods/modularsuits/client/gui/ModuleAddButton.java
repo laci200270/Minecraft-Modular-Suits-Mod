@@ -1,14 +1,17 @@
 package hu.laci200270.mods.modularsuits.client.gui;
 
+import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.client.config.HoverChecker;
 
 public class ModuleAddButton extends GuiButton {
 	
 	private ItemStack stack;
+	private IArmorElement element;
 	/***
 	 * @param buttonId
 	 * @param x
@@ -20,10 +23,10 @@ public class ModuleAddButton extends GuiButton {
 	 */
 	
 	public ModuleAddButton(int buttonId, int x, int y, int widthIn,
-			int heightIn, ItemStack stack) {
+			int heightIn, ItemStack stack,IArmorElement element) {
 		super(buttonId, x, y, widthIn, heightIn, "");
-		this.stack=stack;
-		
+		this.stack=new ItemStack(element.icon());
+		this.element=element;
 		
 		
 	}
@@ -47,10 +50,18 @@ public class ModuleAddButton extends GuiButton {
         this.mouseDragged(mc, mouseX, mouseY);
         
         renderItem.renderItemIntoGUI(stack, xPosition+2, yPosition+1);
+        new HoverChecker(this, 1).checkHover(mouseX, mouseY);
+        
 	}
 	@Override
 	public void drawButtonForegroundLayer(int mouseX, int mouseY) {
 		
+	}
+
+
+	public IArmorElement getElement() {
+		// TODO Auto-generated method stub
+		return element;
 	}
 	
 }

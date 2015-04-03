@@ -2,6 +2,7 @@ package hu.laci200270.mods.modularsuits.common;
 
 import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import hu.laci200270.mods.modularsuits.common.blocks.ConstructingTable;
+import hu.laci200270.mods.modularsuits.common.items.ItemEnergyCrystal;
 import hu.laci200270.mods.modularsuits.common.items.ModularArmorItem;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
 
@@ -26,12 +27,13 @@ public class Reference {
 	public static ArrayList<Block> blocks=new ArrayList<Block>();
 	public static ArrayList<? extends TileEntity> tiles=new ArrayList<TileEntity>();
 	public static ArrayList<IArmorElement> armorElements=new ArrayList<IArmorElement>();
-	public static ArmorMaterial modulararmormaterial=EnumHelper.addArmorMaterial("MODULAR_ARMOR", "modulararmor", 16, new int[] {3, 8, 6, 3}, 0);
+	public static ArmorMaterial modulararmormaterial=EnumHelper.addArmorMaterial("MODULAR_ARMOR", "modulararmor", -1, new int[] {10, 10, 10, 10}, 0);
 	public static boolean DEBUG = true;
 	public static Item armorHelmet=new ModularArmorItem(modulararmormaterial, 0, 0);
 	public static Item armorChest=new ModularArmorItem(modulararmormaterial, 0, 1);
 	public static Item armorLeggings=new ModularArmorItem(modulararmormaterial, 0, 2);
 	public static Item armorBoots=new ModularArmorItem(modulararmormaterial, 0, 3);
+	public static Item energyCrystal=new ItemEnergyCrystal();
 	
 	public static ResourceLocation backgroundConstructionTable=new ResourceLocation( MODID+":textures/gui/constructiontable.png");
 	
@@ -61,6 +63,8 @@ public static void addBaseTiles(){
 		addItemToRegistry(armorHelmet);
 		addItemToRegistry(armorLeggings);
 		addItemToRegistry(armorBoots);
+		addItemToRegistry(energyCrystal);
+		
 	}
 	public static void addBaseBlocks(){
 		blocks.add(constructingTable);
@@ -72,7 +76,7 @@ public static void addBaseTiles(){
 				logger.logWhenDebug("Registering block:" +block.getUnlocalizedName().substring(5));
 			
 			
-			GameRegistry.registerBlock(block,block.getUnlocalizedName().substring(5));
+			
 	}}
 	public static void addArmorElement(IArmorElement element){
 		armorElements.add(element);
