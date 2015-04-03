@@ -1,13 +1,21 @@
 package hu.laci200270.mods.modularsuits.common.items;
 
+import hu.laci200270.mods.modularsuits.ModularSuits;
+import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import hu.laci200270.mods.modularsuits.api.IModItem;
 import hu.laci200270.mods.modularsuits.common.Reference;
+
+import java.util.List;
+
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -54,11 +62,28 @@ public class ModularArmorItem extends ItemArmor  implements IModItem{
 		return name;
 	}	
 	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn,
+			int itemSlot, boolean isSelected) {
+		if(stack.getTagCompound()==null){
+			stack.setTagCompound(new NBTTagCompound());
+		}	
+	}
+	@Override
 	public void onArmorTick(World world, EntityPlayer player,
-			ItemStack itemStack) {
-if (armorType==1) {
-	//new HealerModule().onElementTick(player, itemStack, 0, 20000);
-}
+			ItemStack stack) {
+		if(stack.getTagCompound()==null){
+			stack.setTagCompound(new NBTTagCompound());
+		}	
+		for (IArmorElement element : Reference.armorElements) {
+				if(stack.getTagCompound().getBoolean(element.getUnlocalizedName())){
+					ItemStack[] playerArmor=new ItemStack[4];
+					for (int i = 0; i < 4; i++) {
+						playerArmor[i]=player.getCurrentArmor(i);
+					}
+					
+					element.onElementTick(player,stack, playerArmor, armorType);
+				}
+			}
 
 	}
 
@@ -72,8 +97,24 @@ if (armorType==1) {
 	@Override
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving,
 			ItemStack itemStack, int armorSlot) {
-		// TODO Auto-generated method stub
+	
 		return super.getArmorModel(entityLiving, itemStack, armorSlot);
 	}
-	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn,
+			List tooltip, boolean advanced) {
+		
+		for (IArmorElement element : Reference.armorElements) {
+			if(ModularSuits.applicabeTo(Reference.armorElements.indexOf(element), stack)){
+			if(stack.getTagCompound().getBoolean(element.getUnlocalizedName())){
+				tooltip.add(StatCollector.translateToLocal(element.getUnlocalizedName())+":"+EnumChatFormatting.GREEN+"true");
+			}
+			else{
+				tooltip.add(StatCollector.translateToLocal(element.getUnlocalizedName())+":"+EnumChatFormatting.RED+"false");
+			}
+		}}
+		
+		super.addInformation(stack, playerIn, tooltip, advanced);
+	}
 }

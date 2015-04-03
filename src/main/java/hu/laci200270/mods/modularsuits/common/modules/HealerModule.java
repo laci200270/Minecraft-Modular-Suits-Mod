@@ -1,7 +1,7 @@
 package hu.laci200270.mods.modularsuits.common.modules;
 
 import hu.laci200270.mods.modularsuits.api.IArmorElement;
-import hu.laci200270.mods.modularsuits.common.items.ModularArmorItem;
+import hu.laci200270.mods.modularsuits.common.Reference;
 
 import java.util.ArrayList;
 
@@ -62,9 +62,16 @@ public class HealerModule implements IArmorElement {
 	@Override
 	public String getUnlocalizedName() {
 		
-		return "hu.laci200270.mods.modularsuits.modules.healermodule";
+		return "hu.laci200270.mods.modularsuits.modules.healermodule.name";
 	}
 
+	@Override
+	public Item[] applicableTo() {
+		// TODO Auto-generated method stub
+		Item[] target={Reference.armorChest};
+		return target;
+	}
+	
 	
 
 }

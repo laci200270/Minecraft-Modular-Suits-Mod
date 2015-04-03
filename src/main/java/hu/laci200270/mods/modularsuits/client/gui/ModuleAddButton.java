@@ -5,13 +5,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.FMLNetworkEvent;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 public class ModuleAddButton extends GuiButton {
-	private Integer x;
-	private Integer y;
+	
 	private ItemStack stack;
 	/***
 	 * @param buttonId
@@ -27,8 +23,7 @@ public class ModuleAddButton extends GuiButton {
 			int heightIn, ItemStack stack) {
 		super(buttonId, x, y, widthIn, heightIn, "");
 		this.stack=stack;
-		this.x=x;
-		this.y=y;
+		
 		
 		
 	}
@@ -57,5 +52,5 @@ public class ModuleAddButton extends GuiButton {
 	public void drawButtonForegroundLayer(int mouseX, int mouseY) {
 		
 	}
-
+	
 }

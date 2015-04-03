@@ -1,7 +1,6 @@
 package hu.laci200270.mods.modularsuits.common.blocks;
 
 import hu.laci200270.mods.modularsuits.ModularSuits;
-import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,7 +16,7 @@ public class ConstructingTable extends Block {
 
 	public ConstructingTable() {
 		super(Material.redstoneLight);
-		
+		setUnlocalizedName("contructiontable");
 	}
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {

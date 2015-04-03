@@ -4,16 +4,13 @@ import hu.laci200270.mods.modularsuits.api.IArmorElement;
 import hu.laci200270.mods.modularsuits.common.Reference;
 import hu.laci200270.mods.modularsuits.common.items.ModularArmorItem;
 import hu.laci200270.mods.modularsuits.common.tile.TileConstructingTable;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.INetHandlerPlayServer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.packet.PacketCustom.IServerPacketHandler;
 public class PacketHandler implements IServerPacketHandler{
@@ -43,6 +40,9 @@ public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandler
 	  TileConstructingTable tile2=(TileConstructingTable) tile;
 	  Reference.logger.logWhenDebug("instanceof");
 		if(tile2.armorpiece!=null&&tile2.armorpiece.getItem() instanceof ModularArmorItem ){
+			if(tile2.armorpiece.getTagCompound()==null){
+				tile2.armorpiece.setTagCompound(new NBTTagCompound());
+			}	
 			if(!tile2.armorpiece.getTagCompound().getBoolean(Reference.armorElements.get(target).getUnlocalizedName())){
 				
 			
@@ -53,6 +53,7 @@ public void handlePacket(PacketCustom packet, EntityPlayerMP player, INetHandler
 	Reference.logger.logWhenDebug("Target: "+target);
     Boolean okay=true;
     IArmorElement[] modules=null;
+	
     modules=(IArmorElement[]) Reference.armorElements.toArray(new IArmorElement[Reference.armorElements.size()]);
     Reference.logger.logWhenDebug("array ok");
     ItemStack[] recipe=modules[target].recipe();

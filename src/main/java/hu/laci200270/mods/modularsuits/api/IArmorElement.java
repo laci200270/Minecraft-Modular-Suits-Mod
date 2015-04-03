@@ -11,5 +11,6 @@ public interface IArmorElement {
 	public Item icon();
 	public ItemStack sendMessage(Integer armorPiece,ItemStack armor,String... message);
 	public String getUnlocalizedName();
+	public Item[] applicableTo();
 	
 }
